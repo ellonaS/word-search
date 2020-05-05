@@ -1,5 +1,6 @@
 package com.ellonaS.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
@@ -21,8 +22,14 @@ public class WordSearchTest{
 	
 	@Test
 	public void generateRandomLetterGridTest() {
-		List <char[]> grid = wordSearch.generateRandomLetterGrid(15);
+		int gridSize = 15;
+		List <char[]> grid = wordSearch.generateRandomLetterGrid(gridSize);
 		assertNotNull(grid);
+		assertEquals (gridSize, grid.size());
+		for (int i = 0; i < gridSize; i++) {
+			assertEquals (gridSize, grid.get(i).length);
+		}
+		
 	}
 
 

@@ -16,6 +16,7 @@ public class WordSearch {
 		
 		for(int i = 0; i < gridSize; i++) {
 			char[] letters = new char[gridSize];
+			grid.add(letters);
 		}
 		
 		return grid;
