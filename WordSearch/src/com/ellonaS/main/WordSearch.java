@@ -80,5 +80,9 @@ public class WordSearch {
 
 		return wordCount;
 	}
+	
+	public int searchTheGridBackward(List<char[]> grid, String word) {
+		return 0;
+	}
 
 }

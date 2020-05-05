@@ -61,5 +61,18 @@ public class WordSearchTest {
 		grid.add(letters3);
 		assertEquals(4, wordSearch.searchTheGridForward(grid, "BOOK"));
 	}
+	
+	@Test
+	public void searchTheGridBackwardTest() {
+		List<char[]> grid = new ArrayList<char[]>();
+		char[] letters1 = { 'K', 'O', 'O', 'B', 'S', 'S', 'K', 'O', 'O', 'B'};
+		grid.add(letters1);
+		char[] letters2 = {'S', 'K', 'O', 'O', 'B', 'S', 'B', 'O', 'O', 'B'};
+		grid.add(letters2);
+		char[] letters3 = {'S', 'A', 'B', 'O', 'K', 'O', 'O', 'B', 'O', 'K'};
+		grid.add(letters3);
+		assertEquals(4, wordSearch.searchTheGridForward(grid, "BOOK"));
+	}
+	
 
 }
