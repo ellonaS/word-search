@@ -27,7 +27,7 @@ public class WordSearch {
 
 	private char[] generateRandomLetterArray(int arrayLength) {
 		// create a list of all alphabet letters
-		List <Character> alphabet = new ArrayList<Character>();
+		List<Character> alphabet = new ArrayList<Character>();
 		for (char c = 'A'; c <= 'Z'; c++) {
 			alphabet.add(c);
 		}
@@ -49,10 +49,36 @@ public class WordSearch {
 			System.out.println(str);
 		}
 	}
-	
-	public int searchTheGridForward(List <char[]> grid, String word) {
-	
-		return 0;
+
+	public int searchTheGridForward(List<char[]> grid, String word) {
+		int wordCount = 0;
+		// loop through list of arrays
+		for (int i = 0; i < grid.size(); i++) {
+			// cast array to string
+			String str = new String(grid.get(i));
+
+			for (int j = 0; j < str.length(); j++) {
+				try {
+					// search for the word in each string
+					if (str.substring(j, j + word.length()).equals(word)) {
+						wordCount++;
+						j += word.length();
+					}
+				}
+				// catch the exception if you're going out of bounds
+				catch (IndexOutOfBoundsException e) {
+					System.out.println("caught");
+					// check if the last characters contain word
+					if (j + word.length() - 1 == str.length()) {
+						if (str.substring(j).equals(word)) {
+							wordCount++;
+						}
+					}
+				}
+			}
+		}
+
+		return wordCount;
 	}
 
 }
