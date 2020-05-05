@@ -1,5 +1,6 @@
 package com.ellonaS.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WordSearch {
@@ -10,7 +11,14 @@ public class WordSearch {
 	}
 	
 	public List <char[]> generateRandomLetterGrid(int gridSize) {
-		return null;
+		
+		List <char[]> grid = new ArrayList <char[]>();
+		
+		for(int i = 0; i < gridSize; i++) {
+			char[] letters = new char[gridSize];
+		}
+		
+		return grid;
 	}
 
 }
