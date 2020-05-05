@@ -1,6 +1,7 @@
 package com.ellonaS.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ellonaS.main.WordSearch;
+
+import junit.framework.Assert;
 
 public class WordSearchTest{
 	
@@ -30,6 +33,17 @@ public class WordSearchTest{
 		assertEquals (gridSize, grid.size());
 		for (int i = 0; i < gridSize; i++) {
 			assertEquals (gridSize, grid.get(i).length);
+		}
+		
+	}
+	@Test
+	public void gridConsistsOfLettersTest() {
+		for (int i = 0; i < gridSize; i++) {
+			char[] letters = grid.get(i);
+			
+			for (char c :letters) {
+				assertTrue(Character.isLetter(c));
+			}
 		}
 		
 	}
