@@ -13,17 +13,19 @@ import com.ellonaS.main.WordSearch;
 public class WordSearchTest{
 	
 	WordSearch wordSearch;
+	List <char[]> grid;
+	int gridSize;
 	
 	@Before
 	public void setup() {
 		wordSearch = new WordSearch();
+		gridSize = 15;
+		grid = wordSearch.generateRandomLetterGrid(gridSize);
 		
 	}
 	
 	@Test
-	public void generateRandomLetterGridTest() {
-		int gridSize = 15;
-		List <char[]> grid = wordSearch.generateRandomLetterGrid(gridSize);
+	public void gridSizeTest() {
 		assertNotNull(grid);
 		assertEquals (gridSize, grid.size());
 		for (int i = 0; i < gridSize; i++) {
