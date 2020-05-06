@@ -88,12 +88,14 @@ public class WordSearch {
 				char swapChar = letters[i];
 				letters[i] = letters[letters.length - 1 - i];
 				letters[letters.length - 1 - i] = swapChar;
-			}
-
-			
+			}	
 		}
 		int wordCount = searchTheGridForward(grid, word);
 		return wordCount;
+	}
+	
+	public int searchTheGridForwardDiagonal (List<char[]> grid, String word) {
+		return 0;
 	}
 
 }
