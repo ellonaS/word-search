@@ -82,7 +82,18 @@ public class WordSearch {
 	}
 	
 	public int searchTheGridBackward(List<char[]> grid, String word) {
-		return 0;
+		//loop though the grid and reverse arrays
+		for (char[] letters : grid) {
+			for (int i = 0; i < letters.length/2; i++) {
+				char swapChar = letters[i];
+				letters[i] = letters[letters.length - 1 - i];
+				letters[letters.length - 1 - i] = swapChar;
+			}
+
+			
+		}
+		int wordCount = searchTheGridForward(grid, word);
+		return wordCount;
 	}
 
 }

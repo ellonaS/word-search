@@ -71,7 +71,7 @@ public class WordSearchTest {
 		grid.add(letters2);
 		char[] letters3 = {'S', 'A', 'B', 'O', 'K', 'O', 'O', 'B', 'O', 'K'};
 		grid.add(letters3);
-		assertEquals(4, wordSearch.searchTheGridForward(grid, "BOOK"));
+		assertEquals(4, wordSearch.searchTheGridBackward(grid, "BOOK"));
 	}
 	
 
