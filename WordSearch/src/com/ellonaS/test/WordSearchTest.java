@@ -10,21 +10,24 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ellonaS.main.LetterGrid;
 import com.ellonaS.main.WordSearch;
 
 import junit.framework.Assert;
 
 public class WordSearchTest {
 
-	WordSearch wordSearch;
-	List<char[]> grid;
-	int gridSize;
+	private WordSearch wordSearch;
+	private LetterGrid letterGrid;
+	private List<char[]> grid;
+	private int gridSize;
 
 	@Before
 	public void setup() {
+		letterGrid = new LetterGrid();
 		wordSearch = new WordSearch();
 		gridSize = 15;
-		grid = wordSearch.generateRandomLetterGrid(gridSize);
+		grid = letterGrid.generateRandomLetterGrid(gridSize);
 
 	}
 
@@ -75,17 +78,17 @@ public class WordSearchTest {
 	}
 	
 	@Test
-	public void searchTheGridForwardDiagonalTest() {
+	public void searchTheGridDiagonallyTest() {
 		List<char[]> grid = new ArrayList<char[]>();
-		char[] letters1 = { 'B', 'B', 'O', 'B', 'S', 'S', 'B', 'O', 'O', 'B'};
+		char[] letters1 = { 'K', 'B', 'O', 'K'};
 		grid.add(letters1);
-		char[] letters2 = { 'S', 'O', 'O', 'O', 'O', 'S', 'B', 'O', 'O', 'B'};
+		char[] letters2 = { 'S', 'O', 'O', 'O'};
 		grid.add(letters2);
-		char[] letters3 = { 'S', 'A', 'O', 'O', 'K', 'O', 'O', 'O', 'O', 'K'};
+		char[] letters3 = { 'S', 'O', 'O', 'O'};
 		grid.add(letters3);
-		char[] letters4 = { 'S', 'A', 'B', 'K', 'K', 'O', 'K', 'B', 'O', 'K'};
+		char[] letters4 = { 'B', 'A', 'B', 'B'};
 		grid.add(letters4);
-		assertEquals(3, wordSearch.searchTheGridForwardDiagonal(grid, "BOOK"));
+		assertEquals(2, wordSearch.searchTheGridDiagonally(grid, "BOOK"));
 	}
 
 }

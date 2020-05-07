@@ -6,50 +6,7 @@ import java.util.Random;
 
 public class WordSearch {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		WordSearch app = new WordSearch();
-		app.displayGrid();
-
-	}
-
-	public List<char[]> generateRandomLetterGrid(int gridSize) {
-
-		List<char[]> grid = new ArrayList<char[]>();
-
-		for (int i = 0; i < gridSize; i++) {
-			char[] letters = generateRandomLetterArray(gridSize);
-			grid.add(letters);
-		}
-
-		return grid;
-	}
-
-	private char[] generateRandomLetterArray(int arrayLength) {
-		// create a list of all alphabet letters
-		List<Character> alphabet = new ArrayList<Character>();
-		for (char c = 'A'; c <= 'Z'; c++) {
-			alphabet.add(c);
-		}
-		// create a new char array, loop through and assign each char to random letter
-		// from alphabet list
-		char[] randomLetters = new char[arrayLength];
-		Random random = new Random();
-		for (int i = 0; i < randomLetters.length; i++) {
-			randomLetters[i] = alphabet.get(random.nextInt(alphabet.size()));
-
-		}
-		return randomLetters;
-	}
-
-	public void displayGrid() {
-		List<char[]> grid = generateRandomLetterGrid(15);
-		for (int i = 0; i < grid.size(); i++) {
-			String str = new String(grid.get(i));
-			System.out.println(str);
-		}
-	}
-
+	
 	public int searchTheGridForward(List<char[]> grid, String word) {
 		int wordCount = 0;
 		// loop through list of arrays
@@ -80,22 +37,70 @@ public class WordSearch {
 
 		return wordCount;
 	}
-	
+
 	public int searchTheGridBackward(List<char[]> grid, String word) {
-		//loop though the grid and reverse arrays
-		for (char[] letters : grid) {
-			for (int i = 0; i < letters.length/2; i++) {
-				char swapChar = letters[i];
-				letters[i] = letters[letters.length - 1 - i];
-				letters[letters.length - 1 - i] = swapChar;
-			}	
-		}
+		grid = reverseStrings(grid);
 		int wordCount = searchTheGridForward(grid, word);
 		return wordCount;
 	}
-	
-	public int searchTheGridForwardDiagonal (List<char[]> grid, String word) {
-		return 0;
+
+	private List<char[]> reverseStrings(List<char[]> grid) {
+		for (char[] letters : grid) {
+			for (int i = 0; i < letters.length / 2; i++) {
+				char swapChar = letters[i];
+				letters[i] = letters[letters.length - 1 - i];
+				letters[letters.length - 1 - i] = swapChar;
+			}
+		}
+		return grid;
+	}
+
+	public int searchTheGridDiagonally(List<char[]> grid, String word) {
+		List<char[]> diagonalLeftToRight = loopThroughDiagonals(grid);
+		List<char[]> diagonalRightToLeft = loopThroughDiagonals(reverseStrings(grid));
+		//
+		List <char[]> diagonalStrings = new ArrayList <char[]>();
+		diagonalStrings.addAll(diagonalRightToLeft);
+		diagonalStrings.addAll(diagonalLeftToRight);
+		
+		return searchTheGridForward(diagonalStrings, word);
+	}
+
+	private List<char[]> loopThroughDiagonals(List<char[]> grid) {
+		
+		// list of arrays to array of arrays
+		char[][] matrix = grid.toArray(new char[0][]);
+		int length = matrix.length;
+		int diagonalLines = (length + length) - 1;
+		int itemsInDiagonal = 0;
+		int midPoint = (diagonalLines / 2) + 1;
+		List<char[]> letters = new ArrayList<char[]>();
+
+		for (int i = 1; i <= diagonalLines; i++) {
+
+			StringBuilder items = new StringBuilder();
+			int rowIndex;
+			int columnIndex;
+
+			if (i <= midPoint) {
+				itemsInDiagonal++;
+				for (int j = 0; j < itemsInDiagonal; j++) {
+					rowIndex = (i - j) - 1;
+					columnIndex = j;
+					items.append(matrix[rowIndex][columnIndex]);
+				}
+			} else {
+				itemsInDiagonal--;
+				for (int j = 0; j < itemsInDiagonal; j++) {
+					rowIndex = (length - 1) - j;
+					columnIndex = (i - length) + j;
+					items.append(matrix[rowIndex][columnIndex]);
+				}
+			}
+
+			letters.add(items.toString().toCharArray());
+		}
+		return letters;
 	}
 
 }
