@@ -59,17 +59,18 @@ public class LetterGrid {
 		}
 		return verticalLines;
 	}
-	
+
 	public List<String> getAllDiagonalLines(List<char[]> grid) {
 		List<String> diagonalLeftToRight = loopThroughDiagonals(grid);
 		List<String> diagonalRightToLeft = loopThroughDiagonals(reverseCharArrays(grid));
-		
-		List <String> diagonalStrings = new ArrayList <>();
+
+		List<String> diagonalStrings = new ArrayList<>();
 		diagonalStrings.addAll(diagonalRightToLeft);
 		diagonalStrings.addAll(diagonalLeftToRight);
-		
+
 		return diagonalStrings;
 	}
+
 	private List<char[]> reverseCharArrays(List<char[]> grid) {
 		for (char[] letters : grid) {
 			for (int i = 0; i < letters.length / 2; i++) {
@@ -80,9 +81,9 @@ public class LetterGrid {
 		}
 		return grid;
 	}
-	
-private List<String> loopThroughDiagonals(List<char[]> grid) {
-		
+
+	private List<String> loopThroughDiagonals(List<char[]> grid) {
+
 		// list of arrays to array of arrays
 		char[][] matrix = grid.toArray(new char[0][]);
 		int length = matrix.length;
@@ -116,6 +117,29 @@ private List<String> loopThroughDiagonals(List<char[]> grid) {
 			letters.add(items.toString());
 		}
 		return letters;
+	}
+
+	public List<String> getAllLinesOfGrid(List<char[]> grid) {
+		List<String> lines = getAllHorizontalLines(grid);
+		lines.addAll(getAllVerticalLines(grid));
+		lines.addAll(getAllDiagonalLines(grid));
+		List <String> reversed = reverseAListOfStrings(lines);
+		lines.addAll(reversed);
+		return lines;
+
+	}
+	
+	private List<String> reverseAListOfStrings(List <String> lines){
+		List <char[]> arrays = new ArrayList<>();
+		for(String line:lines) {
+			arrays.add(line.toCharArray());
+		}
+		arrays = reverseCharArrays(arrays);
+		List <String> reversed = new ArrayList<>();
+		for(char[] array : arrays) {
+			reversed.add(new String (array));
+		}
+		return reversed;
 	}
 
 }
