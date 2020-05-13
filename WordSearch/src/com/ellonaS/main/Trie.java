@@ -62,7 +62,7 @@ public class Trie {
 		currentLevel.isEndOfWord = true;
 	}
 
-	// Returns true if word presents in trie, else false
+	// Returns true if word is present in trie, else false
 	public boolean search(String word) {
 		int level;
 		int length = word.length();

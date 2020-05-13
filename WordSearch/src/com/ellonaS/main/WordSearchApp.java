@@ -16,7 +16,7 @@ public class WordSearchApp {
 	}
 
 	public void displayGrid() {
-		grid = letterGrid.generateRandomLetterGrid(5);
+		grid = letterGrid.generateRandomLetterGrid(1000);
 	
 		for (int i = 0; i < grid.size(); i++) {
 			String str = new String(grid.get(i));
@@ -26,15 +26,16 @@ public class WordSearchApp {
 	}
 
 	private void run() {
+		//generate grid
 		displayGrid();
 		dictionary = new Dictionary();
 		List<String> words = dictionary.loadWords("words.txt");
-		System.out.println(words.size() + " words");
 		
 		// construct trie
 		for (int i = 0; i < words.size(); i++) {
 			trie.insert(words.get(i));
 		}
+		
 		//generate all possible lines from the grid
 		List <String> lines = letterGrid.getAllLinesOfGrid(grid);
 		System.out.println("-----------");
@@ -47,7 +48,8 @@ public class WordSearchApp {
 	}
 	public void searchWords(List <String> lines) {
 		
-		System.out.print("WE FOUND ");
+		System.out.println("------------------------");
+		System.out.print("WE FOUND: ");
 		for (String line : lines) {
 			for(int i = 0; i < line.length(); i++) {
 				if(trie.search(line.substring(i)) == true) {
